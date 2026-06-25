@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/PLUGIN_NAME.output.schema.json",
+  "title": "PLUGIN_NAMEOutput",
+  "type": "object",
+  "required": ["task_id", "request_id", "tool_name", "status"],
+  "properties": {
+    "task_id": { "type": "string" },
+    "request_id": { "type": "string" },
+    "tool_name": { "type": "string" },
+    "trace_id": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["succeeded", "failed", "no_result", "dry_run"]
+    },
+    "summary": { "type": "object" },
+    "artifacts": { "type": "object" },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

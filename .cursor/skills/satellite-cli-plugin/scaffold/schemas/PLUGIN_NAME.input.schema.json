@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/PLUGIN_NAME.input.schema.json",
+  "title": "PLUGIN_NAMEInput",
+  "type": "object",
+  "required": ["request_id"],
+  "properties": {
+    "request_id": { "type": "string", "minLength": 1 },
+    "idempotency_key": { "type": "string" },
+    "trace_id": { "type": "string" },
+    "dry_run": { "type": "boolean" }
+  },
+  "additionalProperties": true
+}

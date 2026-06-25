@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "name": "TOOL_NAME",
+  "executable": "PLUGIN_NAME",
+  "version": "0.1.0",
+  "description": "DESCRIPTION",
+  "domain": "DOMAIN",
+  "safety_class": "planning_only",
+  "commands": ["manifest", "validate", "run"],
+  "scenarios": ["PLUGIN_NAME"],
+  "input_schema_path": "schemas/PLUGIN_NAME.input.schema.json",
+  "output_schema_path": "schemas/PLUGIN_NAME.output.schema.json",
+  "capabilities": {
+    "async": false,
+    "dry_run": true,
+    "cancel": "none",
+    "requires_gmat": false,
+    "requires_hardware": false,
+    "batch": false,
+    "idempotent": false
+  },
+  "resource_limits": {
+    "timeout_sec": 300,
+    "max_parallel": 1,
+    "max_work_dir_mb": 256
+  },
+  "agent_hints": {
+    "when_to_use": "DESCRIPTION",
+    "prerequisites": [],
+    "typical_latency_sec": 5,
+    "compose_with": []
+  }
+}

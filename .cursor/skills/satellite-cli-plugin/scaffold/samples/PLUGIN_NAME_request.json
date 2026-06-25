@@ -1,0 +1,5 @@
+{
+  "request_id": "sample_PLUGIN_NAME_001",
+  "idempotency_key": "sample_PLUGIN_NAME_001",
+  "dry_run": true
+}

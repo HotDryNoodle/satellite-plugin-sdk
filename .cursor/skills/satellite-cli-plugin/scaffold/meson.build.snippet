@@ -1,0 +1,23 @@
+# Paste into root meson.build (adjust paths as needed).
+
+PLUGIN_NAME_lib = static_library(
+  'mp_PLUGIN_UNDERSCORE',
+  files(
+    'src/PLUGIN_NAME/PLUGIN_NAME.cpp',
+  ),
+  include_directories: common_inc,
+  link_with: common_lib,
+  dependencies: [json_dep],
+)
+
+executable(
+  'PLUGIN_NAME',
+  'src/PLUGIN_NAME/main.cpp',
+  include_directories: common_inc,
+  link_with: PLUGIN_NAME_lib,
+  dependencies: [json_dep],
+  install: true,
+)
+
+# Add to install_data for configs/plugins:
+#   'configs/plugins/PLUGIN_NAME.json',
