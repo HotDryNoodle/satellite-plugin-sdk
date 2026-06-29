@@ -5,6 +5,10 @@ build-*/
 *.a
 compile_commands.json
 
+.cache/
+.cursor/
+
+
 # Meson subprojects — track wraps only
 /subprojects/*
 !/subprojects/*.wrap
