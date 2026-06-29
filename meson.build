@@ -12,13 +12,17 @@ json_dep = nlohmann_json_sp.get_variable('nlohmann_json_dep')
 
 inc = include_directories('include')
 
+schemas_dir = meson.current_source_dir() / 'schemas'
 satellite_common_lib = static_library(
   'satellite_common',
   files(
     'src/json_io.cpp',
     'src/manifest.cpp',
     'src/result_envelope.cpp',
+    'src/schema_validate.cpp',
+    'src/cli_options.cpp',
   ),
+  cpp_args: ['-DSATELLITE_SDK_SCHEMAS_DIR="@0@"'.format(schemas_dir)],
   include_directories: inc,
   dependencies: [json_dep],
   install: true,
@@ -35,6 +39,8 @@ install_headers(
   'include/satellite/exit_codes.hpp',
   'include/satellite/manifest.hpp',
   'include/satellite/result_envelope.hpp',
+  'include/satellite/schema_validate.hpp',
+  'include/satellite/cli_options.hpp',
   subdir: 'satellite',
 )
 

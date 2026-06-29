@@ -52,7 +52,7 @@ Scaffold source: [scaffold/](scaffold/).
 
 ### Step 2–3 — Implement + build
 
-- C++ stub: `scaffold/src/PLUGIN_NAME/` → links `mp_common` (mission-planer repo)
+- C++ stub: `scaffold/src/PLUGIN_NAME/` → links `satellite_common` via **satellite-plugin-sdk** wrap
 - **Portable path**: use `scaffold/wrapper/PLUGIN_NAME.py`, set manifest `executable` to script path
 - Meson snippet: `scaffold/meson.build.snippet`
 

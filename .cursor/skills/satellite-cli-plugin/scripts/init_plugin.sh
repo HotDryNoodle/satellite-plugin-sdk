@@ -116,7 +116,7 @@ Created plugin scaffold in: $ROOT
 
 Next steps:
   1. Paste meson snippet: $MESON_SNIPPET
-  2. meson compile -C build   (C++ path needs mp_common — see skill reference.md)
+  2. meson compile -C build   (C++ path needs satellite-plugin-sdk wrap — see skill reference.md)
   3. $SKILL_DIR/scripts/smoke_plugin.sh --root "$ROOT" $EXECUTABLE
 
 EOF

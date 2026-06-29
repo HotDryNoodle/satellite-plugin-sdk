@@ -5,7 +5,7 @@
 | Approach | When | Requirements |
 |----------|------|----------------|
 | **Python wrapper** | New repo, fast prototype | Python 3, copy skill scaffold |
-| **C++ + Meson** | mission-planer or fork with `mp_common` | Meson, `include/mp/common/`, nlohmann_json |
+| **C++ + Meson** | any plugin repo with `satellite-plugin-sdk` wrap | Meson, `satellite::`, `include/satellite/` |
 | **Gold standard** | Learn patterns | `src/mission-planer/` in mission-planer repo |
 
 C++ scaffold includes `#include "mp/common/json_io.hpp"`. Vendor those headers or develop inside mission-planer.

@@ -22,7 +22,7 @@ Then scaffold into your project:
 
 | Path | Purpose |
 |------|---------|
-| `src/PLUGIN_NAME/` | C++ CLI entry + business stub (needs `mp_common` in mission-planer) |
+| `src/PLUGIN_NAME/` | C++ CLI entry + business stub (links `satellite_common` via SDK wrap) |
 | `wrapper/PLUGIN_NAME.py` | Portable Python entry (no C++ build) |
 | `configs/plugins/` | Manifest template |
 | `schemas/` | Input/output + `plugin_manifest.schema.json` |
