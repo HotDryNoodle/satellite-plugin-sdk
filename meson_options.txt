@@ -1,0 +1,2 @@
+option('install_sdk', type: 'boolean', value: true,
+  description: 'Install headers, libsatellite_common.a, and schemas to prefix')

@@ -7,6 +7,8 @@ project('satellite-plugin-sdk', 'cpp',
   ],
 )
 
+install_sdk = get_option('install_sdk') and not meson.is_subproject()
+
 nlohmann_json_sp = subproject('nlohmann_json')
 json_dep = nlohmann_json_sp.get_variable('nlohmann_json_dep')
 
@@ -25,7 +27,7 @@ satellite_common_lib = static_library(
   cpp_args: ['-DSATELLITE_SDK_SCHEMAS_DIR="@0@"'.format(schemas_dir)],
   include_directories: inc,
   dependencies: [json_dep],
-  install: true,
+  install: install_sdk,
 )
 
 satellite_common_dep = declare_dependency(
@@ -34,25 +36,27 @@ satellite_common_dep = declare_dependency(
   dependencies: [json_dep],
 )
 
-install_headers(
-  'include/satellite/json_io.hpp',
-  'include/satellite/exit_codes.hpp',
-  'include/satellite/manifest.hpp',
-  'include/satellite/result_envelope.hpp',
-  'include/satellite/schema_validate.hpp',
-  'include/satellite/cli_options.hpp',
-  subdir: 'satellite',
-)
+if install_sdk
+  install_headers(
+    'include/satellite/json_io.hpp',
+    'include/satellite/exit_codes.hpp',
+    'include/satellite/manifest.hpp',
+    'include/satellite/result_envelope.hpp',
+    'include/satellite/schema_validate.hpp',
+    'include/satellite/cli_options.hpp',
+    subdir: 'satellite',
+  )
 
-install_headers(
-  'include/mp/common/json_io.hpp',
-  'include/mp/common/exit_codes.hpp',
-  subdir: 'mp/common',
-)
+  install_headers(
+    'include/mp/common/json_io.hpp',
+    'include/mp/common/exit_codes.hpp',
+    subdir: 'mp/common',
+  )
 
-install_data(
-  'schemas/plugin_manifest.schema.json',
-  'schemas/task_envelope.schema.json',
-  'schemas/task_result.schema.json',
-  install_dir: get_option('datadir') / 'satellite-plugin-sdk/schemas',
-)
+  install_data(
+    'schemas/plugin_manifest.schema.json',
+    'schemas/task_envelope.schema.json',
+    'schemas/task_result.schema.json',
+    install_dir: get_option('datadir') / 'satellite-plugin-sdk/schemas',
+  )
+endif
