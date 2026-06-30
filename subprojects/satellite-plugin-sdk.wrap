@@ -1,5 +1,0 @@
-# Template for consumers — set url/revision to your git remote.
-[wrap-git]
-url = file:///home/hotdry/projects/satellite-plugin-sdk
-revision = HEAD
-directory = satellite-plugin-sdk

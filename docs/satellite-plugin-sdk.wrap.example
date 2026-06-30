@@ -1,0 +1,6 @@
+# Consumer template — copy into your Meson project as subprojects/satellite-plugin-sdk.wrap
+# and set url + revision to a released SDK commit (see satellite-workspace VERSIONS.lock).
+[wrap-git]
+url = https://github.com/HotDryNoodle/satellite-plugin-sdk.git
+revision = v0.1.0
+directory = satellite-plugin-sdk

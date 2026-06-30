@@ -5,7 +5,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD="${BUILD:-$ROOT/build}"
 
 if [[ ! -f "$BUILD/meson-private/coredata.dat" ]]; then
-  (cd "$ROOT" && meson subprojects download && meson setup build)
+  (cd "$ROOT" && meson subprojects download nlohmann_json && meson setup build)
 fi
 meson compile -C "$BUILD"
 
