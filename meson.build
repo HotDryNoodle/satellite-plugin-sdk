@@ -47,11 +47,6 @@ if install_sdk
     subdir: 'satellite',
   )
 
-  install_headers(
-    'include/mp/common/json_io.hpp',
-    'include/mp/common/exit_codes.hpp',
-    subdir: 'mp/common',
-  )
 
   install_data(
     'schemas/plugin_manifest.schema.json',

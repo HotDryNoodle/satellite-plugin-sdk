@@ -3,7 +3,6 @@
 Plugin contract runtime for satellite embodied-intelligence CLI plugins.
 
 - `satellite_common` static library (`satellite::` API)
-- `mp/common/*` compatibility forward headers (v0.1)
 - JSON schemas for manifest and TaskManager envelopes
 
 ## Build
