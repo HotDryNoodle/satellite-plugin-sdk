@@ -211,6 +211,77 @@
       "path": "negative/manifest/1.1/capabilities_extra_field.json",
       "kind": "manifest",
       "expect": "fail"
+    },
+    {
+      "id": "P-C-01",
+      "path": "canonical/positive/time_window.json",
+      "kind": "canonical",
+      "canonical_type": "TimeWindow",
+      "expect": "pass"
+    },
+    {
+      "id": "P-C-02",
+      "path": "canonical/positive/window_set.json",
+      "kind": "canonical",
+      "canonical_type": "WindowSet",
+      "expect": "pass"
+    },
+    {
+      "id": "P-C-03",
+      "path": "canonical/positive/data_product.json",
+      "kind": "canonical",
+      "canonical_type": "DataProduct",
+      "expect": "pass"
+    },
+    {
+      "id": "P-C-04",
+      "path": "canonical/positive/delivery_receipt.json",
+      "kind": "canonical",
+      "canonical_type": "DeliveryReceipt",
+      "expect": "pass"
+    },
+    {
+      "id": "P-C-05",
+      "path": "canonical/positive/image_meta_set.json",
+      "kind": "canonical",
+      "canonical_type": "ImageMetaSet",
+      "expect": "pass"
+    },
+    {
+      "id": "P-C-06",
+      "path": "canonical/positive/policy_decision.json",
+      "kind": "canonical",
+      "canonical_type": "PolicyDecision",
+      "expect": "pass"
+    },
+    {
+      "id": "N-C-01",
+      "path": "canonical/negative/window_set_missing_node_id.json",
+      "kind": "canonical",
+      "canonical_type": "WindowSet",
+      "expect": "fail"
+    },
+    {
+      "id": "N-C-02",
+      "path": "canonical/negative/data_product_bad_artifact_ref.json",
+      "kind": "canonical",
+      "canonical_type": "DataProduct",
+      "expect": "fail",
+      "notes": "nfs:// not in v1.0 artifact_ref set (local://|node://)"
+    },
+    {
+      "id": "N-C-03",
+      "path": "canonical/negative/policy_decision_incomplete_breakdown.json",
+      "kind": "canonical",
+      "canonical_type": "PolicyDecision",
+      "expect": "fail"
+    },
+    {
+      "id": "N-C-04",
+      "path": "canonical/negative/delivery_receipt_missing_receiver.json",
+      "kind": "canonical",
+      "canonical_type": "DeliveryReceipt",
+      "expect": "fail"
     }
   ]
 }

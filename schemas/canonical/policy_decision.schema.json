@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/canonical/policy_decision.schema.json",
+  "title": "PolicyDecision",
+  "type": "object",
+  "required": ["candidate_id", "feasible", "cost", "reason", "tie_breaker", "selected"],
+  "properties": {
+    "candidate_id": { "type": "string", "minLength": 1 },
+    "feasible": { "type": "boolean" },
+    "cost": { "$ref": "cost_score.schema.json" },
+    "reason": { "type": "string", "minLength": 1 },
+    "tie_breaker": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    },
+    "selected": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

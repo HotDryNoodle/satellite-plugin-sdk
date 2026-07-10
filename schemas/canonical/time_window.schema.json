@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/canonical/time_window.schema.json",
+  "title": "TimeWindow",
+  "type": "object",
+  "required": ["start_utc", "end_utc", "node_id"],
+  "properties": {
+    "start_utc": { "type": "string", "minLength": 1 },
+    "end_utc": { "type": "string", "minLength": 1 },
+    "t0_utc": { "type": "string", "minLength": 1 },
+    "node_id": { "type": "string", "minLength": 1 },
+    "cost": { "type": "number" },
+    "phi_deg": { "type": "number" }
+  },
+  "additionalProperties": true
+}

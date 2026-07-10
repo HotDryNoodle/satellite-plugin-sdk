@@ -1,0 +1,14 @@
+{
+  "delivered_at_utc": "2026-12-30T02:00:00Z",
+  "via": "net.deliver",
+  "receiver": {
+    "ip": "10.0.3.7",
+    "lla": {
+      "lon_deg": 116.4,
+      "lat_deg": 39.9,
+      "alt_km": 0.03
+    }
+  },
+  "mission_id": "m-0001",
+  "step_id": "S8"
+}

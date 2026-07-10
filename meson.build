@@ -76,4 +76,16 @@ if install_sdk
     'schemas/common/envelope_header.1.1.schema.json',
     install_dir: get_option('datadir') / 'satellite-plugin-sdk/schemas/common',
   )
+
+  install_data(
+    'schemas/canonical/time_window.schema.json',
+    'schemas/canonical/window_set.schema.json',
+    'schemas/canonical/data_product.schema.json',
+    'schemas/canonical/delivery_receipt.schema.json',
+    'schemas/canonical/image_meta.schema.json',
+    'schemas/canonical/image_meta_set.schema.json',
+    'schemas/canonical/cost_score.schema.json',
+    'schemas/canonical/policy_decision.schema.json',
+    install_dir: get_option('datadir') / 'satellite-plugin-sdk/schemas/canonical',
+  )
 endif

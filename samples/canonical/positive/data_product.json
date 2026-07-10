@@ -1,0 +1,19 @@
+{
+  "artifact_ref": "node://sat-B/intelligent/work/m-0001/S4/product.bin",
+  "produced_by_node": "sat-B/intelligent",
+  "location_node": "sat-B/intelligent",
+  "size_bytes": 1048576,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "media_type": "application/octet-stream",
+  "lifecycle": {
+    "created_at_utc": "2026-12-30T01:05:00Z",
+    "expires_at_utc": null,
+    "retention_policy": null
+  },
+  "transfer": {
+    "copied": false,
+    "method": null,
+    "target_node": null,
+    "receipt_id": null
+  }
+}

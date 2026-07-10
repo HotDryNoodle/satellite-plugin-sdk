@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/canonical/image_meta_set.schema.json",
+  "title": "ImageMetaSet",
+  "type": "object",
+  "required": ["images", "query_range"],
+  "properties": {
+    "images": {
+      "type": "array",
+      "items": { "$ref": "image_meta.schema.json" }
+    },
+    "query_range": { "$ref": "../common/time_range.schema.json" }
+  },
+  "additionalProperties": false
+}

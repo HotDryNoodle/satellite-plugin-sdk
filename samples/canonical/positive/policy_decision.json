@@ -1,0 +1,17 @@
+{
+  "candidate_id": "sat-B/window-001",
+  "feasible": true,
+  "cost": {
+    "value": 1230.0,
+    "unit": "sec",
+    "breakdown": {
+      "time_sec": 1230.0,
+      "energy": null,
+      "storage": null,
+      "link": null
+    }
+  },
+  "reason": "earliest_available_window",
+  "tie_breaker": ["start_utc", "node_id"],
+  "selected": true
+}

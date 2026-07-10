@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SDK contract test: build + schema validation for 1.0/1.1 samples.
+# SDK contract test: build + schema validation for 1.0/1.1 samples + canonical types.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD="${BUILD:-$ROOT/build}"
@@ -48,7 +48,25 @@ def resolve_schema_path(version: str, kind: str) -> pathlib.Path:
     return schemas_dir / entry[kind]
 
 
-def load_schema(version: str, kind: str):
+def resolve_canonical_schema_path(canonical_type: str) -> pathlib.Path:
+    canonical = registry_doc.get("canonical", {})
+    if canonical_type not in canonical:
+        raise SystemExit(f"schema_registry missing canonical type {canonical_type}")
+    return schemas_dir / canonical[canonical_type]
+
+
+def load_schema_for_case(case: dict, instance: dict):
+    kind = case["kind"]
+    if kind == "canonical":
+        ctype = case.get("canonical_type")
+        if not ctype:
+            raise SystemExit(f"{case['id']}: canonical case missing canonical_type")
+        path = resolve_canonical_schema_path(ctype)
+        return json.loads(path.read_text()), path
+
+    version = case.get("force_schema_version") or instance.get("schema_version")
+    if not version:
+        raise SystemExit(f"{case['id']}: missing schema_version")
     path = resolve_schema_path(version, kind)
     return json.loads(path.read_text()), path
 
@@ -70,18 +88,16 @@ def validate_case(case: dict) -> None:
     sample_path = samples_dir / case["path"]
     instance = json.loads(sample_path.read_text())
     kind = case["kind"]
-    version = case.get("force_schema_version") or instance.get("schema_version")
-    if not version:
-        raise SystemExit(f"{case['id']}: missing schema_version")
-
-    schema, schema_path = load_schema(version, kind)
+    schema, schema_path = load_schema_for_case(case, instance)
     validator = Draft202012Validator(schema, registry=ref_registry)
     schema_errors = sorted(validator.iter_errors(instance), key=lambda e: list(e.path))
     extra_errors = apply_extra_rules(instance, case.get("extra_rules", []))
 
+    version = case.get("force_schema_version") or instance.get("schema_version")
     # Always enforce F6 on 1.1 documents that carry both ids (positive path).
     if (
-        version == "1.1"
+        kind != "canonical"
+        and version == "1.1"
         and "mission_id_ne_task_id" not in case.get("extra_rules", [])
         and instance.get("mission_id") is not None
         and instance.get("task_id") is not None
@@ -108,6 +124,9 @@ def validate_case(case: dict) -> None:
 forbidden_registry_keys = {"policy", "fallback", "negotiation", "runtime"}
 if any(k in registry_doc for k in forbidden_registry_keys):
     raise SystemExit("schema_registry.json must not contain runtime policy keys")
+
+if "canonical" not in registry_doc or not isinstance(registry_doc["canonical"], dict):
+    raise SystemExit("schema_registry.json missing canonical inventory map")
 
 for case in manifest["cases"]:
     validate_case(case)

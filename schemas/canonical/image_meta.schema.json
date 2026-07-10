@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/canonical/image_meta.schema.json",
+  "title": "ImageMeta",
+  "type": "object",
+  "required": ["image_id", "time_range", "storage_path", "size_bytes", "location_node"],
+  "properties": {
+    "image_id": { "type": "string", "minLength": 1 },
+    "time_range": { "$ref": "../common/time_range.schema.json" },
+    "storage_path": { "type": "string", "minLength": 1 },
+    "size_bytes": { "type": "integer", "minimum": 0 },
+    "location_node": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

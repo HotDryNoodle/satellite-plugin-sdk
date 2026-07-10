@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/canonical/data_product.schema.json",
+  "title": "DataProduct",
+  "type": "object",
+  "required": [
+    "artifact_ref",
+    "produced_by_node",
+    "location_node",
+    "size_bytes",
+    "sha256",
+    "media_type"
+  ],
+  "properties": {
+    "artifact_ref": {
+      "type": "string",
+      "pattern": "^(local|node)://.+"
+    },
+    "produced_by_node": { "type": "string", "minLength": 1 },
+    "location_node": { "type": "string", "minLength": 1 },
+    "size_bytes": { "type": "integer", "minimum": 0 },
+    "sha256": { "type": "string", "minLength": 1 },
+    "media_type": { "type": "string", "minLength": 1 },
+    "lifecycle": {
+      "type": "object",
+      "properties": {
+        "created_at_utc": { "type": "string", "minLength": 1 },
+        "expires_at_utc": { "type": ["string", "null"], "minLength": 1 },
+        "retention_policy": { "type": ["string", "null"], "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "transfer": {
+      "type": "object",
+      "properties": {
+        "copied": { "type": "boolean" },
+        "method": { "type": ["string", "null"] },
+        "target_node": { "type": ["string", "null"] },
+        "receipt_id": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

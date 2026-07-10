@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/canonical/cost_score.schema.json",
+  "title": "CostScore",
+  "type": "object",
+  "required": ["value", "unit", "breakdown"],
+  "properties": {
+    "value": { "type": "number" },
+    "unit": { "type": "string", "minLength": 1 },
+    "breakdown": {
+      "type": "object",
+      "required": ["time_sec", "energy", "storage", "link"],
+      "properties": {
+        "time_sec": { "type": ["number", "null"] },
+        "energy": { "type": ["number", "null"] },
+        "storage": { "type": ["number", "null"] },
+        "link": { "type": ["number", "null"] }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,8 @@
+{
+  "artifact_ref": "nfs://share/path/product.bin",
+  "produced_by_node": "sat-B/intelligent",
+  "location_node": "sat-B/intelligent",
+  "size_bytes": 100,
+  "sha256": "abc",
+  "media_type": "application/octet-stream"
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/canonical/delivery_receipt.schema.json",
+  "title": "DeliveryReceipt",
+  "type": "object",
+  "required": ["delivered_at_utc", "via", "receiver"],
+  "properties": {
+    "delivered_at_utc": { "type": "string", "minLength": 1 },
+    "via": { "type": "string", "minLength": 1 },
+    "receiver": { "$ref": "../common/receiver.schema.json" },
+    "mission_id": { "type": "string", "minLength": 1 },
+    "step_id": { "type": "string", "minLength": 1 },
+    "idempotency_key": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

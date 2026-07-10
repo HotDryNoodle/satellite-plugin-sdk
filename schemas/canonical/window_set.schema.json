@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/canonical/window_set.schema.json",
+  "title": "WindowSet",
+  "type": "object",
+  "required": ["windows", "reference_utc"],
+  "properties": {
+    "windows": {
+      "type": "array",
+      "items": { "$ref": "time_window.schema.json" }
+    },
+    "reference_utc": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}
