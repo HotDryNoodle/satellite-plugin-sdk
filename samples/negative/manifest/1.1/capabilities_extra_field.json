@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.1",
+  "name": "net.deliver",
+  "executable": "mock-net-deliver",
+  "version": "0.1.0",
+  "commands": ["manifest", "validate", "run"],
+  "capabilities": {
+    "kind": "deliver",
+    "side_effect_class": "none",
+    "relocatable": false,
+    "deterministic": false,
+    "idempotent": true,
+    "retryable": false,
+    "consumes": ["DataProduct"],
+    "produces": ["DeliveryReceipt"],
+    "extra_cap_field": true
+  }
+}

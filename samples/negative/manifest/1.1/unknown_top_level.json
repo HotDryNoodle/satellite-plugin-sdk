@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.1",
+  "name": "access.remote_sensing_access",
+  "executable": "access-computer",
+  "version": "0.1.0",
+  "commands": ["manifest", "validate", "run"],
+  "capabilities": {
+    "kind": "compute",
+    "side_effect_class": "none",
+    "relocatable": true,
+    "deterministic": true,
+    "idempotent": true,
+    "retryable": true,
+    "consumes": ["GeoPoint"],
+    "produces": ["WindowSet"]
+  },
+  "unknown_top_level": true
+}

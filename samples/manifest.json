@@ -148,6 +148,69 @@
       "path": "negative/1.1/invalid_binding_mode.json",
       "kind": "envelope",
       "expect": "fail"
+    },
+    {
+      "id": "P-M-1.0-01",
+      "path": "manifest/1.0/access_compute.json",
+      "kind": "manifest",
+      "expect": "pass"
+    },
+    {
+      "id": "P-M-1.1-01",
+      "path": "manifest/1.1/compute_access.json",
+      "kind": "manifest",
+      "expect": "pass"
+    },
+    {
+      "id": "P-M-1.1-02",
+      "path": "manifest/1.1/policy_select.json",
+      "kind": "manifest",
+      "expect": "pass"
+    },
+    {
+      "id": "P-M-1.1-03",
+      "path": "manifest/1.1/deliver_net.json",
+      "kind": "manifest",
+      "expect": "pass"
+    },
+    {
+      "id": "N-M-1.0-01",
+      "path": "negative/manifest/1.0/top_level_kind.json",
+      "kind": "manifest",
+      "force_schema_version": "1.0",
+      "expect": "fail",
+      "notes": "1.0 top-level rejects kind; capabilities.kind is not closed in 1.0"
+    },
+    {
+      "id": "N-M-1.0-02",
+      "path": "negative/manifest/1.0/commands_status.json",
+      "kind": "manifest",
+      "force_schema_version": "1.0",
+      "expect": "fail"
+    },
+    {
+      "id": "N-M-1.1-01",
+      "path": "negative/manifest/1.1/missing_kind.json",
+      "kind": "manifest",
+      "expect": "fail"
+    },
+    {
+      "id": "N-M-1.1-02",
+      "path": "negative/manifest/1.1/invalid_kind.json",
+      "kind": "manifest",
+      "expect": "fail"
+    },
+    {
+      "id": "N-M-1.1-03",
+      "path": "negative/manifest/1.1/unknown_top_level.json",
+      "kind": "manifest",
+      "expect": "fail"
+    },
+    {
+      "id": "N-M-1.1-04",
+      "path": "negative/manifest/1.1/capabilities_extra_field.json",
+      "kind": "manifest",
+      "expect": "fail"
     }
   ]
 }

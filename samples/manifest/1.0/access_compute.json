@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "name": "access.remote_sensing_access",
+  "executable": "access-computer",
+  "version": "0.1.0",
+  "description": "1.0 baseline compute plugin sample",
+  "commands": ["manifest", "validate", "run"],
+  "capabilities": {
+    "async": false,
+    "dry_run": true,
+    "cancel": "process_signal",
+    "requires_gmat": true,
+    "idempotent": true
+  },
+  "resource_limits": {
+    "timeout_sec": 600,
+    "max_parallel": 1
+  }
+}

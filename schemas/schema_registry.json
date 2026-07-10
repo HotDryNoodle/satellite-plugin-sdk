@@ -12,7 +12,7 @@
     "1.1": {
       "envelope": "task_envelope.1.1.schema.json",
       "result": "task_result.1.1.schema.json",
-      "manifest": "plugin_manifest.schema.json"
+      "manifest": "plugin_manifest.1.1.schema.json"
     }
   }
 }

@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.1",
+  "name": "access.remote_sensing_access",
+  "executable": "access-computer",
+  "version": "0.1.0",
+  "description": "1.1 compute capability sample (schema only; live plugin upgrade is AC-023)",
+  "safety_class": "planning_only",
+  "commands": ["manifest", "validate", "run", "status", "cancel"],
+  "capabilities": {
+    "kind": "compute",
+    "side_effect_class": "none",
+    "relocatable": true,
+    "deterministic": true,
+    "idempotent": true,
+    "retryable": true,
+    "consumes": ["GeoPoint", "OrbitState"],
+    "produces": ["WindowSet"],
+    "hardware_tag": null,
+    "timeout_sec": 600,
+    "compensation": null,
+    "cost_hint": {
+      "typical_latency_sec": 120
+    },
+    "async": false,
+    "dry_run": true,
+    "cancel": "process_signal",
+    "requires_gmat": true
+  },
+  "resource_limits": {
+    "timeout_sec": 600,
+    "max_parallel": 1
+  }
+}

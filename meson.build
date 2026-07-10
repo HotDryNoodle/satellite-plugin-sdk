@@ -55,6 +55,7 @@ if install_sdk
 
   install_data(
     'schemas/plugin_manifest.schema.json',
+    'schemas/plugin_manifest.1.1.schema.json',
     'schemas/task_envelope.schema.json',
     'schemas/task_result.schema.json',
     'schemas/task_envelope.1.1.schema.json',
