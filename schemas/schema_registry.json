@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/schema_registry.json",
+  "title": "SatelliteSchemaRegistry",
+  "description": "Version routing inventory only. Maps schema_version + document kind to schema file paths under schemas/. Does not encode runtime policy, negotiation, or fallback rules.",
+  "versions": {
+    "1.0": {
+      "envelope": "task_envelope.schema.json",
+      "result": "task_result.schema.json",
+      "manifest": "plugin_manifest.schema.json"
+    },
+    "1.1": {
+      "envelope": "task_envelope.1.1.schema.json",
+      "result": "task_result.1.1.schema.json",
+      "manifest": "plugin_manifest.schema.json"
+    }
+  }
+}

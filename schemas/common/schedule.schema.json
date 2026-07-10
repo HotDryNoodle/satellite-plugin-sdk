@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/common/schedule.schema.json",
+  "title": "StepSchedule",
+  "type": "object",
+  "properties": {
+    "not_before_utc": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "window_ref": {
+      "type": ["string", "null"],
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

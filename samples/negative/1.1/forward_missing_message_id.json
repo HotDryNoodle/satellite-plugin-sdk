@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.1",
+  "message_type": "task.forward",
+  "request_id": "req-n-fwd",
+  "source_node": "sat-A/intelligent",
+  "mission_id": "m-0001",
+  "step_id": "S3",
+  "payload": {}
+}

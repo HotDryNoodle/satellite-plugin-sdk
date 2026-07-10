@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/common/time_range.schema.json",
+  "title": "TimeRange",
+  "type": "object",
+  "required": ["start_utc", "end_utc"],
+  "properties": {
+    "start_utc": { "type": "string", "minLength": 1 },
+    "end_utc": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

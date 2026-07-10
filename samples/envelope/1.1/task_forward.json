@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.1",
+  "message_type": "task.forward",
+  "request_id": "req-1.1-fwd",
+  "message_id": "msg-fwd-001",
+  "source_node": "sat-A/intelligent",
+  "target_node": "sat-B/intelligent",
+  "mission_id": "m-0001",
+  "step_id": "S3",
+  "idempotency_key": "fwd-m-0001-S3",
+  "payload": {
+    "tool_name": "access.remote_sensing_access",
+    "run": {}
+  }
+}

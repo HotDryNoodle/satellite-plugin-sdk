@@ -176,4 +176,51 @@ SchemaValidation validate_against_schema_file(const nlohmann::json& instance,
     return validate_against_schema(instance, schema);
 }
 
+SchemaValidation resolve_schema_for_version(const std::string& schema_version,
+                                            const std::string& kind,
+                                            std::filesystem::path* out_schema_path) {
+    const auto registry_path = default_schemas_dir() / "schema_registry.json";
+    if (!std::filesystem::exists(registry_path)) {
+        return fail("schema_registry.json not found: " + registry_path.string());
+    }
+    const auto registry = read_json_file(registry_path);
+    if (!registry.contains("versions") || !registry.at("versions").is_object()) {
+        return fail("schema_registry.json missing versions object");
+    }
+    const auto& versions = registry.at("versions");
+    if (!versions.contains(schema_version) || !versions.at(schema_version).is_object()) {
+        return fail("schema_registry has no entry for schema_version=" + schema_version);
+    }
+    const auto& entry = versions.at(schema_version);
+    if (!entry.contains(kind) || !entry.at(kind).is_string()) {
+        return fail("schema_registry version " + schema_version + " missing kind=" + kind);
+    }
+    const auto relative = entry.at(kind).get<std::string>();
+    const auto resolved = default_schemas_dir() / relative;
+    if (out_schema_path != nullptr) {
+        *out_schema_path = resolved;
+    }
+    if (!std::filesystem::exists(resolved)) {
+        return fail("registered schema file not found: " + resolved.string());
+    }
+    return SchemaValidation{true, resolved.string()};
+}
+
+SchemaValidation validate_by_schema_version(const nlohmann::json& instance,
+                                            const std::string& kind) {
+    if (!instance.is_object() || !instance.contains("schema_version") ||
+        !instance.at("schema_version").is_string()) {
+        return fail("instance missing schema_version string");
+    }
+    const auto version = instance.at("schema_version").get<std::string>();
+    std::filesystem::path schema_path;
+    auto resolved = resolve_schema_for_version(version, kind, &schema_path);
+    if (!resolved.ok) {
+        return resolved;
+    }
+    // Lightweight C++ validator: required/type/enum/const/additionalProperties only.
+    // Full Draft 2020-12 ($ref/oneOf/if-then) coverage is in scripts/contract-test.sh.
+    return validate_against_schema_file(instance, schema_path);
+}
+
 }  // namespace satellite

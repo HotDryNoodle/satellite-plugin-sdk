@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.1",
+  "message_type": "task.offer",
+  "request_id": "req-1.1-offer",
+  "message_id": "msg-offer-001",
+  "source_node": "sat-A/intelligent",
+  "target_node": "sat-B/intelligent",
+  "mission_id": "m-0001",
+  "step_id": "S1",
+  "idempotency_key": "offer-m-0001-S1-sat-B",
+  "payload": {
+    "phase": "detect",
+    "reference_utc": "2026-12-30T00:00:00Z"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.1",
+  "message_type": "task.submit",
+  "request_id": "req-1.1-hr",
+  "tool_name": "task-manager",
+  "mission_id": "m-0003",
+  "template_id": "historical_replay",
+  "template_version": "2026.07.0",
+  "origin": {
+    "node_id": "ground",
+    "coordinator_node": "sat-A/intelligent",
+    "uploaded_at_utc": "2026-07-06T00:00:00Z"
+  },
+  "task_type": "historical_replay",
+  "params": {
+    "receiver": {
+      "ip": "10.0.3.7",
+      "lla": {
+        "lon_deg": 116.4,
+        "lat_deg": 39.9,
+        "alt_km": 0.03
+      }
+    },
+    "time_range": {
+      "start_utc": "2026-12-30T00:00:00Z",
+      "end_utc": "2026-12-31T00:00:00Z"
+    }
+  },
+  "binding": {
+    "mode": "local",
+    "target_node": "sat-A/intelligent"
+  },
+  "routing": {
+    "on_result": "deliver",
+    "deliver_to_ref": "params.receiver"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "message_type": "task.submit",
+  "request_id": "req-n-1.0-01",
+  "tool_name": "task-manager",
+  "mission_id": "m-should-fail",
+  "payload": {}
+}

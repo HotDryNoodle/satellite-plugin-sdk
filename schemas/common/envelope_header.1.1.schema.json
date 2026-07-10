@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/common/envelope_header.1.1.schema.json",
+  "title": "TaskEnvelopeHeader11",
+  "type": "object",
+  "required": ["schema_version", "message_type", "request_id"],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.1" },
+    "message_type": {
+      "type": "string",
+      "enum": [
+        "task.submit",
+        "task.run",
+        "task.cancel",
+        "task.submit.result",
+        "task.cancel.result",
+        "task.status",
+        "task.heartbeat",
+        "task.status.result",
+        "task.offer",
+        "task.bid",
+        "task.forward",
+        "task.ack",
+        "task.list",
+        "task.query",
+        "task.list_tools",
+        "task.list.result",
+        "task.query.result",
+        "task.list_tools.result",
+        "task.result",
+        "task.deliver",
+        "task.receipt",
+        "task.error"
+      ]
+    },
+    "request_id": { "type": "string", "minLength": 1 },
+    "message_id": { "type": "string", "minLength": 1 },
+    "source_node": { "type": "string", "minLength": 1 },
+    "target_node": { "type": "string", "minLength": 1 },
+    "mission_id": { "type": "string", "minLength": 1 },
+    "step_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "idempotency_key": { "type": "string", "minLength": 1 },
+    "tool_name": { "type": "string", "minLength": 1 },
+    "tool_version": { "type": "string", "minLength": 1 },
+    "priority": { "type": "integer", "minimum": 0, "maximum": 10 },
+    "deadline_utc": { "type": "string", "minLength": 1 },
+    "reply_to": { "type": "string", "minLength": 1 },
+    "trace_id": { "type": "string", "minLength": 1 }
+  }
+}

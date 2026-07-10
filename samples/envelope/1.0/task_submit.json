@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "message_type": "task.submit",
+  "request_id": "req-1.0-01",
+  "tool_name": "access.remote_sensing_access",
+  "payload": {
+    "task": {
+      "scenario": "remote_sensing_access"
+    }
+  }
+}

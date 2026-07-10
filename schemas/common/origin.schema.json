@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/common/origin.schema.json",
+  "title": "MissionOrigin",
+  "type": "object",
+  "required": ["node_id", "coordinator_node", "uploaded_at_utc"],
+  "properties": {
+    "node_id": { "type": "string", "minLength": 1 },
+    "coordinator_node": { "type": "string", "minLength": 1 },
+    "uploaded_at_utc": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

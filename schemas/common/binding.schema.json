@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/common/binding.schema.json",
+  "title": "StepBinding",
+  "type": "object",
+  "required": ["mode"],
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": ["nearest", "fixed", "local", "constellation"]
+    },
+    "target_node": {
+      "type": ["string", "null"],
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

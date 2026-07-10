@@ -1,0 +1,593 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/task_envelope.1.1.schema.json",
+  "title": "TaskEnvelope11",
+  "description": "Parallel schema_version=1.1 envelope. Validate after reading schema_version; do not use 1.0 schema for these messages.",
+  "oneOf": [
+    { "$ref": "#/$defs/mission_submit" },
+    { "$ref": "#/$defs/task_run" },
+    { "$ref": "#/$defs/control_offer" },
+    { "$ref": "#/$defs/control_bid" },
+    { "$ref": "#/$defs/control_forward" },
+    { "$ref": "#/$defs/control_ack" },
+    { "$ref": "#/$defs/task_cancel" },
+    { "$ref": "#/$defs/task_status" },
+    { "$ref": "#/$defs/task_heartbeat" },
+    { "$ref": "#/$defs/query_list" },
+    { "$ref": "#/$defs/query_query" },
+    { "$ref": "#/$defs/query_list_tools" },
+    { "$ref": "#/$defs/data_result" },
+    { "$ref": "#/$defs/data_deliver" },
+    { "$ref": "#/$defs/data_receipt" },
+    { "$ref": "#/$defs/response_generic" },
+    { "$ref": "#/$defs/task_error" }
+  ],
+  "$defs": {
+    "header_props": {
+      "schema_version": { "type": "string", "const": "1.1" },
+      "message_type": {
+        "type": "string",
+        "enum": [
+          "task.submit",
+          "task.run",
+          "task.cancel",
+          "task.submit.result",
+          "task.cancel.result",
+          "task.status",
+          "task.heartbeat",
+          "task.status.result",
+          "task.offer",
+          "task.bid",
+          "task.forward",
+          "task.ack",
+          "task.list",
+          "task.query",
+          "task.list_tools",
+          "task.list.result",
+          "task.query.result",
+          "task.list_tools.result",
+          "task.result",
+          "task.deliver",
+          "task.receipt",
+          "task.error"
+        ]
+      },
+      "request_id": { "type": "string", "minLength": 1 },
+      "message_id": { "type": "string", "minLength": 1 },
+      "source_node": { "type": "string", "minLength": 1 },
+      "target_node": { "type": "string", "minLength": 1 },
+      "mission_id": { "type": "string", "minLength": 1 },
+      "step_id": { "type": "string", "minLength": 1 },
+      "task_id": { "type": "string", "minLength": 1 },
+      "idempotency_key": { "type": "string", "minLength": 1 },
+      "tool_name": { "type": "string", "minLength": 1 },
+      "tool_version": { "type": "string", "minLength": 1 },
+      "priority": { "type": "integer", "minimum": 0, "maximum": 10 },
+      "deadline_utc": { "type": "string", "minLength": 1 },
+      "reply_to": { "type": "string", "minLength": 1 },
+      "trace_id": { "type": "string", "minLength": 1 }
+    },
+    "candidate": {
+      "type": "object",
+      "required": ["window", "node_id", "cost"],
+      "properties": {
+        "window": {
+          "type": "object",
+          "required": ["start_utc", "end_utc"],
+          "properties": {
+            "start_utc": { "type": "string", "minLength": 1 },
+            "end_utc": { "type": "string", "minLength": 1 },
+            "t0_utc": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": true
+        },
+        "node_id": { "type": "string", "minLength": 1 },
+        "cost": { "type": "number" },
+        "capability": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "mission_submit": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "tool_name",
+        "mission_id",
+        "template_id",
+        "template_version",
+        "origin",
+        "task_type",
+        "params",
+        "binding",
+        "routing"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.submit" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "tool_name": { "type": "string", "minLength": 1 },
+        "tool_version": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "task_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "idempotency_key": { "type": "string", "minLength": 1 },
+        "priority": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "deadline_utc": { "type": "string", "minLength": 1 },
+        "reply_to": { "type": "string", "minLength": 1 },
+        "trace_id": { "type": "string", "minLength": 1 },
+        "template_id": { "type": "string", "minLength": 1 },
+        "template_version": { "type": "string", "minLength": 1 },
+        "origin": { "$ref": "common/origin.schema.json" },
+        "task_type": {
+          "type": "string",
+          "enum": [
+            "remote_detection",
+            "single_remote_detection",
+            "historical_replay"
+          ]
+        },
+        "params": { "$ref": "common/mission_params.schema.json" },
+        "binding": { "$ref": "common/binding.schema.json" },
+        "schedule": { "$ref": "common/schedule.schema.json" },
+        "routing": { "$ref": "common/routing.schema.json" }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "task_type": { "const": "remote_detection" } },
+            "required": ["task_type"]
+          },
+          "then": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "required": ["target_lla", "receiver", "time_range"],
+                "not": { "required": ["execute_ip"] }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "task_type": { "const": "single_remote_detection" } },
+            "required": ["task_type"]
+          },
+          "then": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "required": ["target_lla", "receiver", "time_range", "execute_ip"]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "task_type": { "const": "historical_replay" } },
+            "required": ["task_type"]
+          },
+          "then": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "required": ["time_range", "receiver"],
+                "not": {
+                  "anyOf": [
+                    { "required": ["target_lla"] },
+                    { "required": ["execute_ip"] }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "task_run": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "message_id",
+        "tool_name",
+        "mission_id",
+        "step_id",
+        "payload"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.run" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "tool_name": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "task_id": { "type": "string", "minLength": 1 },
+        "idempotency_key": { "type": "string", "minLength": 1 },
+        "binding": { "$ref": "common/binding.schema.json" },
+        "schedule": { "$ref": "common/schedule.schema.json" },
+        "routing": { "$ref": "common/routing.schema.json" },
+        "payload": { "type": "object" },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "control_offer": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "message_id",
+        "source_node",
+        "target_node",
+        "mission_id",
+        "step_id",
+        "payload"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.offer" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "idempotency_key": { "type": "string", "minLength": 1 },
+        "payload": { "type": "object" },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "control_bid": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "message_id",
+        "source_node",
+        "target_node",
+        "mission_id",
+        "step_id",
+        "candidates"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.bid" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "idempotency_key": { "type": "string", "minLength": 1 },
+        "candidates": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/candidate" }
+        },
+        "capability": { "type": "object" },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "control_forward": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "message_id",
+        "source_node",
+        "target_node",
+        "mission_id",
+        "step_id",
+        "payload"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.forward" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "idempotency_key": { "type": "string", "minLength": 1 },
+        "payload": { "type": "object" },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "control_ack": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "message_id",
+        "source_node",
+        "target_node",
+        "ack_of"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.ack" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "ack_of": { "type": "string", "minLength": 1 },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "task_cancel": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "message_id",
+        "mission_id"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.cancel" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "task_id": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string" },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "task_status": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "mission_id"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.status" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "task_id": { "type": "string", "minLength": 1 },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "task_heartbeat": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "mission_id",
+        "step_id"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.heartbeat" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "progress": { "type": "number", "minimum": 0, "maximum": 1 },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "query_list": {
+      "type": "object",
+      "required": ["schema_version", "message_type", "request_id"],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.list" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "filter": { "type": "object" },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "query_query": {
+      "type": "object",
+      "required": ["schema_version", "message_type", "request_id", "mission_id"],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.query" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "filter": { "type": "object" },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "query_list_tools": {
+      "type": "object",
+      "required": ["schema_version", "message_type", "request_id"],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.list_tools" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "data_result": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "mission_id",
+        "tool_name",
+        "status",
+        "body"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.result" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "task_id": { "type": "string", "minLength": 1 },
+        "tool_name": { "type": "string", "minLength": 1 },
+        "status": {
+          "type": "string",
+          "enum": [
+            "submitted",
+            "validating",
+            "queued",
+            "running",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "no_result"
+          ]
+        },
+        "body": { "type": "object" },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "data_deliver": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "message_id",
+        "mission_id",
+        "step_id",
+        "payload"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.deliver" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "idempotency_key": { "type": "string", "minLength": 1 },
+        "payload": { "type": "object" },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "data_receipt": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "message_id",
+        "mission_id",
+        "step_id",
+        "delivered_at_utc",
+        "via",
+        "receiver"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.receipt" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "idempotency_key": { "type": "string", "minLength": 1 },
+        "delivered_at_utc": { "type": "string", "minLength": 1 },
+        "via": { "type": "string", "minLength": 1 },
+        "receiver": { "$ref": "common/receiver.schema.json" },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "response_generic": {
+      "type": "object",
+      "required": ["schema_version", "message_type", "request_id"],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": {
+          "type": "string",
+          "enum": [
+            "task.submit.result",
+            "task.cancel.result",
+            "task.status.result",
+            "task.list.result",
+            "task.query.result",
+            "task.list_tools.result"
+          ]
+        },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "status": { "type": "string", "minLength": 1 },
+        "result": { "type": "object" },
+        "tools": { "type": "array" },
+        "missions": { "type": "array" },
+        "errors": { "type": "array", "items": { "type": "string" } },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "task_error": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "error_class",
+        "failure_reason"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.error" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "step_id": { "type": "string", "minLength": 1 },
+        "error_class": { "type": "string", "minLength": 1 },
+        "failure_reason": { "type": "string", "minLength": 1 },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  }
+}

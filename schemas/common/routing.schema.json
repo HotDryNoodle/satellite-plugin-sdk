@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/common/routing.schema.json",
+  "title": "StepRouting",
+  "type": "object",
+  "required": ["on_result"],
+  "properties": {
+    "on_result": {
+      "type": "string",
+      "enum": ["feed", "forward", "deliver"]
+    },
+    "deliver_to_ref": {
+      "type": ["string", "null"],
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

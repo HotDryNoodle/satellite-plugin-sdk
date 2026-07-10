@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/common/geo_point.schema.json",
+  "title": "GeoPoint",
+  "type": "object",
+  "required": ["lon_deg", "lat_deg", "alt_km"],
+  "properties": {
+    "lon_deg": { "type": "number" },
+    "lat_deg": { "type": "number" },
+    "alt_km": { "type": "number" }
+  },
+  "additionalProperties": false
+}

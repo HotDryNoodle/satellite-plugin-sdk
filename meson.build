@@ -57,6 +57,22 @@ if install_sdk
     'schemas/plugin_manifest.schema.json',
     'schemas/task_envelope.schema.json',
     'schemas/task_result.schema.json',
+    'schemas/task_envelope.1.1.schema.json',
+    'schemas/task_result.1.1.schema.json',
+    'schemas/schema_registry.json',
     install_dir: get_option('datadir') / 'satellite-plugin-sdk/schemas',
+  )
+
+  install_data(
+    'schemas/common/geo_point.schema.json',
+    'schemas/common/origin.schema.json',
+    'schemas/common/binding.schema.json',
+    'schemas/common/schedule.schema.json',
+    'schemas/common/routing.schema.json',
+    'schemas/common/time_range.schema.json',
+    'schemas/common/receiver.schema.json',
+    'schemas/common/mission_params.schema.json',
+    'schemas/common/envelope_header.1.1.schema.json',
+    install_dir: get_option('datadir') / 'satellite-plugin-sdk/schemas/common',
   )
 endif

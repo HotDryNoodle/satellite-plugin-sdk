@@ -1,0 +1,153 @@
+{
+  "cases": [
+    {
+      "id": "P-1.0-01",
+      "path": "envelope/1.0/task_submit.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.0-02",
+      "path": "result/1.0/task_result.json",
+      "kind": "result",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-01",
+      "path": "envelope/1.1/rd_submit.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-02",
+      "path": "envelope/1.1/srd_submit.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-03",
+      "path": "envelope/1.1/hr_submit.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-04",
+      "path": "envelope/1.1/task_offer.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-05",
+      "path": "envelope/1.1/task_bid.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-06",
+      "path": "envelope/1.1/task_forward.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-07",
+      "path": "envelope/1.1/task_ack.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-08",
+      "path": "envelope/1.1/task_query.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-09",
+      "path": "envelope/1.1/task_query_result.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-10",
+      "path": "envelope/1.1/task_receipt.json",
+      "kind": "envelope",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-11",
+      "path": "result/1.1/task_result.json",
+      "kind": "result",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-12",
+      "path": "result/1.1/bid_result.json",
+      "kind": "result",
+      "expect": "pass"
+    },
+    {
+      "id": "P-1.1-13",
+      "path": "result/1.1/receipt_result.json",
+      "kind": "result",
+      "expect": "pass"
+    },
+    {
+      "id": "N-1.0-01",
+      "path": "negative/1.0/envelope_with_mission_id.json",
+      "kind": "envelope",
+      "force_schema_version": "1.0",
+      "expect": "fail"
+    },
+    {
+      "id": "N-1.0-02",
+      "path": "negative/1.0/unknown_message_type.json",
+      "kind": "envelope",
+      "force_schema_version": "1.0",
+      "expect": "fail"
+    },
+    {
+      "id": "N-1.0-03",
+      "path": "negative/1.0/mission_fields_against_1.0_schema.json",
+      "kind": "envelope",
+      "force_schema_version": "1.0",
+      "expect": "fail",
+      "notes": "1.1 Mission fields must be rejected by 1.0 schema"
+    },
+    {
+      "id": "N-1.1-01",
+      "path": "negative/1.1/mission_id_equals_task_id.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "extra_rules": ["mission_id_ne_task_id"]
+    },
+    {
+      "id": "N-1.1-02",
+      "path": "negative/1.1/mission_submit_with_payload.json",
+      "kind": "envelope",
+      "expect": "fail"
+    },
+    {
+      "id": "N-1.1-03",
+      "path": "negative/1.1/rd_with_execute_ip.json",
+      "kind": "envelope",
+      "expect": "fail"
+    },
+    {
+      "id": "N-1.1-04",
+      "path": "negative/1.1/hr_with_target_lla.json",
+      "kind": "envelope",
+      "expect": "fail"
+    },
+    {
+      "id": "N-1.1-05",
+      "path": "negative/1.1/forward_missing_message_id.json",
+      "kind": "envelope",
+      "expect": "fail"
+    },
+    {
+      "id": "N-1.1-06",
+      "path": "negative/1.1/invalid_binding_mode.json",
+      "kind": "envelope",
+      "expect": "fail"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/common/receiver.schema.json",
+  "title": "Receiver",
+  "type": "object",
+  "required": ["ip", "lla"],
+  "properties": {
+    "ip": { "type": "string", "minLength": 1 },
+    "lla": { "$ref": "geo_point.schema.json" }
+  },
+  "additionalProperties": false
+}

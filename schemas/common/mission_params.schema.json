@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/common/mission_params.schema.json",
+  "title": "MissionParams",
+  "type": "object",
+  "properties": {
+    "target_lla": { "$ref": "geo_point.schema.json" },
+    "receiver": { "$ref": "receiver.schema.json" },
+    "execute_ip": { "type": "string", "minLength": 1 },
+    "time_range": { "$ref": "time_range.schema.json" }
+  },
+  "additionalProperties": false
+}
