@@ -2,15 +2,35 @@
   "cases": [
     {
       "id": "P-1.0-01",
-      "path": "envelope/1.0/task_submit.json",
+      "path": "archive/1.0/envelope/task_submit.json",
       "kind": "envelope",
-      "expect": "pass"
+      "force_schema_version": "1.1",
+      "expect": "fail",
+      "notes": "reject-on-active: archived 1.0 positive must fail against active 1.1 schema"
+    },
+    {
+      "id": "P-1.0-01-archive",
+      "path": "archive/1.0/envelope/task_submit.json",
+      "kind": "envelope",
+      "schema_source": "archive",
+      "expect": "pass",
+      "notes": "archived 1.0 schema still accepts historical positive sample"
     },
     {
       "id": "P-1.0-02",
-      "path": "result/1.0/task_result.json",
+      "path": "archive/1.0/result/task_result.json",
       "kind": "result",
-      "expect": "pass"
+      "force_schema_version": "1.1",
+      "expect": "fail",
+      "notes": "reject-on-active: archived 1.0 positive must fail against active 1.1 schema"
+    },
+    {
+      "id": "P-1.0-02-archive",
+      "path": "archive/1.0/result/task_result.json",
+      "kind": "result",
+      "schema_source": "archive",
+      "expect": "pass",
+      "notes": "archived 1.0 schema still accepts historical positive sample"
     },
     {
       "id": "P-1.1-01",
@@ -92,25 +112,25 @@
     },
     {
       "id": "N-1.0-01",
-      "path": "negative/1.0/envelope_with_mission_id.json",
+      "path": "archive/1.0/negative/envelope_with_mission_id.json",
       "kind": "envelope",
-      "force_schema_version": "1.0",
+      "schema_source": "archive",
       "expect": "fail"
     },
     {
       "id": "N-1.0-02",
-      "path": "negative/1.0/unknown_message_type.json",
+      "path": "archive/1.0/negative/unknown_message_type.json",
       "kind": "envelope",
-      "force_schema_version": "1.0",
+      "schema_source": "archive",
       "expect": "fail"
     },
     {
       "id": "N-1.0-03",
-      "path": "negative/1.0/mission_fields_against_1.0_schema.json",
+      "path": "archive/1.0/negative/mission_fields_against_1.0_schema.json",
       "kind": "envelope",
-      "force_schema_version": "1.0",
+      "schema_source": "archive",
       "expect": "fail",
-      "notes": "1.1 Mission fields must be rejected by 1.0 schema"
+      "notes": "1.1 Mission fields must be rejected by archived 1.0 schema"
     },
     {
       "id": "N-1.1-01",
@@ -151,9 +171,19 @@
     },
     {
       "id": "P-M-1.0-01",
-      "path": "manifest/1.0/access_compute.json",
+      "path": "archive/1.0/manifest/access_compute.json",
       "kind": "manifest",
-      "expect": "pass"
+      "force_schema_version": "1.1",
+      "expect": "fail",
+      "notes": "reject-on-active: archived 1.0 positive must fail against active 1.1 schema"
+    },
+    {
+      "id": "P-M-1.0-01-archive",
+      "path": "archive/1.0/manifest/access_compute.json",
+      "kind": "manifest",
+      "schema_source": "archive",
+      "expect": "pass",
+      "notes": "archived 1.0 schema still accepts historical positive sample"
     },
     {
       "id": "P-M-1.1-01",
@@ -175,17 +205,17 @@
     },
     {
       "id": "N-M-1.0-01",
-      "path": "negative/manifest/1.0/top_level_kind.json",
+      "path": "archive/1.0/negative/manifest/top_level_kind.json",
       "kind": "manifest",
-      "force_schema_version": "1.0",
+      "schema_source": "archive",
       "expect": "fail",
       "notes": "1.0 top-level rejects kind; capabilities.kind is not closed in 1.0"
     },
     {
       "id": "N-M-1.0-02",
-      "path": "negative/manifest/1.0/commands_status.json",
+      "path": "archive/1.0/negative/manifest/commands_status.json",
       "kind": "manifest",
-      "force_schema_version": "1.0",
+      "schema_source": "archive",
       "expect": "fail"
     },
     {

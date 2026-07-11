@@ -49,14 +49,18 @@ if install_sdk
 
 
   install_data(
-    'schemas/plugin_manifest.schema.json',
     'schemas/plugin_manifest.1.1.schema.json',
-    'schemas/task_envelope.schema.json',
-    'schemas/task_result.schema.json',
     'schemas/task_envelope.1.1.schema.json',
     'schemas/task_result.1.1.schema.json',
     'schemas/schema_registry.json',
     install_dir: get_option('datadir') / 'satellite-plugin-sdk/schemas',
+  )
+
+  install_data(
+    'schemas/archive/1.0/plugin_manifest.schema.json',
+    'schemas/archive/1.0/task_envelope.schema.json',
+    'schemas/archive/1.0/task_result.schema.json',
+    install_dir: get_option('datadir') / 'satellite-plugin-sdk/schemas/archive/1.0',
   )
 
   install_data(

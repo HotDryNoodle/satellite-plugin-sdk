@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://mission-planer.local/schemas/plugin_manifest.1.1.schema.json",
   "title": "PluginManifest11",
-  "description": "Parallel schema_version=1.1 plugin manifest. Adds capabilities.kind and side-effect semantics. Does not modify 1.0 plugin_manifest.schema.json.",
+  "description": "Active schema_version=1.1 plugin manifest. Adds capabilities.kind and side-effect semantics. Historical 1.0 manifests are under schemas/archive/1.0/ and are not on the active registry route.",
   "type": "object",
   "required": ["schema_version", "name", "executable", "version", "commands", "capabilities"],
   "properties": {

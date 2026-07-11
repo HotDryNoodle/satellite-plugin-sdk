@@ -2,17 +2,19 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://mission-planer.local/schemas/schema_registry.json",
   "title": "SatelliteSchemaRegistry",
-  "description": "Version routing inventory only. Maps schema_version + document kind to schema file paths under schemas/, and lists canonical type schemas. Does not encode runtime policy, negotiation, or fallback rules.",
+  "description": "Version routing inventory only. Active protocol is schema_version 1.1 only; product milestone may still be called v1.0. Maps schema_version + document kind to schema file paths under schemas/, lists archive paths for retired 1.0 schemas, and lists canonical type schemas. Does not encode runtime policy, negotiation, or fallback rules.",
   "versions": {
-    "1.0": {
-      "envelope": "task_envelope.schema.json",
-      "result": "task_result.schema.json",
-      "manifest": "plugin_manifest.schema.json"
-    },
     "1.1": {
       "envelope": "task_envelope.1.1.schema.json",
       "result": "task_result.1.1.schema.json",
       "manifest": "plugin_manifest.1.1.schema.json"
+    }
+  },
+  "archive": {
+    "1.0": {
+      "envelope": "archive/1.0/task_envelope.schema.json",
+      "result": "archive/1.0/task_result.schema.json",
+      "manifest": "archive/1.0/plugin_manifest.schema.json"
     }
   },
   "canonical": {

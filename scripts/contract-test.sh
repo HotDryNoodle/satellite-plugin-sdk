@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# SDK contract test: build + schema validation for 1.0/1.1 samples + canonical types.
+# SDK contract test: build + schema validation for active 1.1 samples,
+# archived 1.0 fixtures, and canonical types.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD="${BUILD:-$ROOT/build}"
@@ -38,13 +39,20 @@ for path in schemas_dir.rglob("*.json"):
 ref_registry = Registry().with_resources(resources)
 
 
-def resolve_schema_path(version: str, kind: str) -> pathlib.Path:
-    versions = registry_doc.get("versions", {})
-    if version not in versions:
-        raise SystemExit(f"schema_registry missing version {version}")
-    entry = versions[version]
+def resolve_schema_path(version: str, kind: str, schema_source: str = "active") -> pathlib.Path:
+    if schema_source == "archive":
+        table = registry_doc.get("archive", {})
+        label = "archive"
+    elif schema_source == "active":
+        table = registry_doc.get("versions", {})
+        label = "versions"
+    else:
+        raise SystemExit(f"unknown schema_source={schema_source!r}")
+    if version not in table:
+        raise SystemExit(f"schema_registry missing {label} version {version}")
+    entry = table[version]
     if kind not in entry:
-        raise SystemExit(f"schema_registry version {version} missing kind {kind}")
+        raise SystemExit(f"schema_registry {label} version {version} missing kind {kind}")
     return schemas_dir / entry[kind]
 
 
@@ -64,10 +72,11 @@ def load_schema_for_case(case: dict, instance: dict):
         path = resolve_canonical_schema_path(ctype)
         return json.loads(path.read_text()), path
 
+    schema_source = case.get("schema_source", "active")
     version = case.get("force_schema_version") or instance.get("schema_version")
     if not version:
         raise SystemExit(f"{case['id']}: missing schema_version")
-    path = resolve_schema_path(version, kind)
+    path = resolve_schema_path(version, kind, schema_source)
     return json.loads(path.read_text()), path
 
 
@@ -127,6 +136,9 @@ if any(k in registry_doc for k in forbidden_registry_keys):
 
 if "canonical" not in registry_doc or not isinstance(registry_doc["canonical"], dict):
     raise SystemExit("schema_registry.json missing canonical inventory map")
+
+if "1.0" in registry_doc.get("versions", {}):
+    raise SystemExit("schema_registry versions must not list retired 1.0")
 
 for case in manifest["cases"]:
     validate_case(case)
