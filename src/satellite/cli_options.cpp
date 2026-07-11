@@ -10,7 +10,8 @@ std::string plugin_cli_usage(const char* executable) {
            " validate (--input FILE | --stdin) [--output json|json-pretty]\n"
            "  " +
            executable +
-           " run (--input FILE | --stdin) --work-dir DIR [--dry-run] [--output json|json-pretty]\n";
+           " run (--input FILE | --stdin) --work-dir DIR [--dry-run] [--output "
+           "json|json-pretty]\n";
 }
 
 CliParseResult parse_plugin_cli(int argc, char** argv, bool require_work_dir) {
@@ -47,28 +48,30 @@ CliParseResult parse_plugin_cli(int argc, char** argv, bool require_work_dir) {
             const std::string fmt = argv[++i];
             if (fmt == "json-pretty") {
                 result.options.output = OutputFormat::JsonPretty;
-            } else if (fmt == "json") {
+            }
+            else if (fmt == "json") {
                 result.options.output = OutputFormat::Json;
-            } else {
-                result.ok = false;
+            }
+            else {
+                result.ok    = false;
                 result.error = "unsupported --output format: " + fmt;
                 return result;
             }
             continue;
         }
-        result.ok = false;
+        result.ok    = false;
         result.error = "unknown argument: " + arg;
         return result;
     }
 
     if (require_work_dir && !result.options.work_dir.has_value()) {
-        result.ok = false;
+        result.ok    = false;
         result.error = "--work-dir is required";
         return result;
     }
 
     if (!result.options.use_stdin && !result.options.input_path.has_value()) {
-        result.ok = false;
+        result.ok    = false;
         result.error = "--input FILE or --stdin is required";
         return result;
     }

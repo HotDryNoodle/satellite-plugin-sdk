@@ -12,17 +12,17 @@ install_sdk = get_option('install_sdk') and not meson.is_subproject()
 nlohmann_json_sp = subproject('nlohmann_json')
 json_dep = nlohmann_json_sp.get_variable('nlohmann_json_dep')
 
-inc = include_directories('include')
+inc = include_directories('src')
 
 schemas_dir = meson.current_source_dir() / 'schemas'
 satellite_common_lib = static_library(
   'satellite_common',
   files(
-    'src/json_io.cpp',
-    'src/manifest.cpp',
-    'src/result_envelope.cpp',
-    'src/schema_validate.cpp',
-    'src/cli_options.cpp',
+    'src/satellite/json_io.cpp',
+    'src/satellite/manifest.cpp',
+    'src/satellite/result_envelope.cpp',
+    'src/satellite/schema_validate.cpp',
+    'src/satellite/cli_options.cpp',
   ),
   cpp_args: ['-DSATELLITE_SDK_SCHEMAS_DIR="@0@"'.format(schemas_dir)],
   include_directories: inc,
@@ -38,12 +38,12 @@ satellite_common_dep = declare_dependency(
 
 if install_sdk
   install_headers(
-    'include/satellite/json_io.hpp',
-    'include/satellite/exit_codes.hpp',
-    'include/satellite/manifest.hpp',
-    'include/satellite/result_envelope.hpp',
-    'include/satellite/schema_validate.hpp',
-    'include/satellite/cli_options.hpp',
+    'src/satellite/json_io.hpp',
+    'src/satellite/exit_codes.hpp',
+    'src/satellite/manifest.hpp',
+    'src/satellite/result_envelope.hpp',
+    'src/satellite/schema_validate.hpp',
+    'src/satellite/cli_options.hpp',
     subdir: 'satellite',
   )
 
