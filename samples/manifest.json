@@ -75,6 +75,20 @@
       "expect": "pass"
     },
     {
+      "id": "P-1.1-07b",
+      "path": "envelope/1.1/task_ack_result.json",
+      "kind": "envelope",
+      "expect": "pass",
+      "notes": "local Message Router RPC receipt for inbound task.ack (not peer Ack-of-Ack)"
+    },
+    {
+      "id": "P-1.1-07c",
+      "path": "envelope/1.1/task_ack_result_minimal.json",
+      "kind": "envelope",
+      "expect": "pass",
+      "notes": "ack_result required-only; must not also match response_generic"
+    },
+    {
       "id": "P-1.1-08",
       "path": "envelope/1.1/task_query.json",
       "kind": "envelope",
@@ -168,6 +182,20 @@
       "path": "negative/1.1/invalid_binding_mode.json",
       "kind": "envelope",
       "expect": "fail"
+    },
+    {
+      "id": "N-1.1-07",
+      "path": "negative/1.1/forward_unexpected_property.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "control_forward additionalProperties:false"
+    },
+    {
+      "id": "N-1.1-08",
+      "path": "negative/1.1/ack_unexpected_property.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "control_ack additionalProperties:false"
     },
     {
       "id": "P-M-1.0-01",

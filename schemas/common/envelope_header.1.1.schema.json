@@ -21,6 +21,7 @@
         "task.bid",
         "task.forward",
         "task.ack",
+        "task.ack.result",
         "task.list",
         "task.query",
         "task.list_tools",

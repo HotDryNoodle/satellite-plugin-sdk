@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.1",
+  "message_type": "task.ack",
+  "request_id": "req-n-ack-extra",
+  "message_id": "msg-n-ack-extra",
+  "source_node": "sat-B/intelligent",
+  "target_node": "sat-A/intelligent",
+  "ack_of": "msg-fwd-001",
+  "unexpected": true
+}

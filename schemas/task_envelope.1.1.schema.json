@@ -10,6 +10,7 @@
     { "$ref": "#/$defs/control_bid" },
     { "$ref": "#/$defs/control_forward" },
     { "$ref": "#/$defs/control_ack" },
+    { "$ref": "#/$defs/ack_result" },
     { "$ref": "#/$defs/task_cancel" },
     { "$ref": "#/$defs/task_status" },
     { "$ref": "#/$defs/task_heartbeat" },
@@ -40,6 +41,7 @@
           "task.bid",
           "task.forward",
           "task.ack",
+          "task.ack.result",
           "task.list",
           "task.query",
           "task.list_tools",
@@ -283,6 +285,31 @@
         "mission_id": { "type": "string", "minLength": 1 },
         "step_id": { "type": "string", "minLength": 1 },
         "ack_of": { "type": "string", "minLength": 1 },
+        "trace_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "ack_result": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "message_type",
+        "request_id",
+        "status"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "1.1" },
+        "message_type": { "type": "string", "const": "task.ack.result" },
+        "request_id": { "type": "string", "minLength": 1 },
+        "message_id": { "type": "string", "minLength": 1 },
+        "source_node": { "type": "string", "minLength": 1 },
+        "target_node": { "type": "string", "minLength": 1 },
+        "mission_id": { "type": "string", "minLength": 1 },
+        "ack_of": { "type": "string", "minLength": 1 },
+        "status": {
+          "type": "string",
+          "enum": ["ok", "ignored"]
+        },
         "trace_id": { "type": "string", "minLength": 1 }
       },
       "additionalProperties": false
