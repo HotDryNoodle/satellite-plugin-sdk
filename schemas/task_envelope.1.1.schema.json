@@ -428,7 +428,11 @@
         "schema_version",
         "message_type",
         "request_id",
+        "message_id",
+        "source_node",
+        "target_node",
         "mission_id",
+        "step_id",
         "tool_name",
         "status",
         "body"
@@ -447,14 +451,10 @@
         "status": {
           "type": "string",
           "enum": [
-            "submitted",
-            "validating",
-            "queued",
             "running",
             "succeeded",
             "failed",
-            "cancelled",
-            "no_result"
+            "cancelled"
           ]
         },
         "body": { "type": "object" },

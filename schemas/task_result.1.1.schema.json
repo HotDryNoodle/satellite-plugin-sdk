@@ -21,14 +21,10 @@
     "status": {
       "type": "string",
       "enum": [
-        "submitted",
-        "validating",
-        "queued",
         "running",
         "succeeded",
         "failed",
-        "cancelled",
-        "no_result"
+        "cancelled"
       ]
     },
     "node_id": { "type": "string", "minLength": 1 },

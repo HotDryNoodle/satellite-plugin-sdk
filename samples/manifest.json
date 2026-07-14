@@ -107,6 +107,13 @@
       "expect": "pass"
     },
     {
+      "id": "P-1.1-10b",
+      "path": "envelope/1.1/task_result_reliable.json",
+      "kind": "envelope",
+      "expect": "pass",
+      "notes": "TM-009 reliable peer task.result requires message_id/source/target/mission/step"
+    },
+    {
       "id": "P-1.1-11",
       "path": "result/1.1/task_result.json",
       "kind": "result",
@@ -196,6 +203,13 @@
       "kind": "envelope",
       "expect": "fail",
       "notes": "control_ack additionalProperties:false"
+    },
+    {
+      "id": "N-1.1-09",
+      "path": "negative/1.1/result_status_no_result.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "TM-009 F13: status=no_result removed from active 1.1; use failed+failure_reason=no_result"
     },
     {
       "id": "P-M-1.0-01",
