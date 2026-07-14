@@ -1,14 +1,13 @@
 {
   "schema_version": "1.1",
   "message_type": "task.offer",
-  "request_id": "req-1.1-offer",
-  "message_id": "msg-offer-001",
+  "request_id": "req-1.1-offer-obsolete-constraint",
+  "message_id": "msg-offer-obsolete-constraint",
   "source_node": "sat-A/intelligent",
   "target_node": "sat-B/intelligent",
   "mission_id": "m-0001",
   "step_id": "S1",
   "offer_round_id": "round-m-0001-S1-1",
-  "idempotency_key": "offer-m-0001-S1-sat-B",
   "payload": {
     "phase": "detect",
     "scenario": "remote_sensing_access",
@@ -16,11 +15,8 @@
     "compute_horizon_sec": 86400,
     "working_time_sec": 200,
     "step_sec": 10,
-    "placeholder_requirements": {
-      "requires_kind": "actuate",
-      "requires_hardware": "optic",
-      "consumes": ["GeoPoint", "TimeWindow"],
-      "produces": ["DataProduct"]
+    "constraints": {
+      "task_duration_sec": 200
     }
   }
 }

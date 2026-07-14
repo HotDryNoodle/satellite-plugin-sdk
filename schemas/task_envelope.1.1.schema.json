@@ -152,13 +152,99 @@
       "type": "object",
       "properties": {
         "reference_utc": { "type": "string", "minLength": 1 },
+        "compute_horizon_sec": {
+          "type": "number",
+          "minimum": 1,
+          "description": "AC-004 propagation horizon H, in seconds"
+        },
+        "working_time_sec": {
+          "type": "number",
+          "minimum": 1,
+          "description": "AC-004 working-window length W, in seconds"
+        },
+        "step_sec": {
+          "type": "number",
+          "minimum": 0.1,
+          "description": "AC-004 computation step, in seconds"
+        },
+        "duration_sec": false,
+        "elapsed_start_sec": false,
+        "task_duration_sec": false,
+        "constraints": {
+          "type": "object",
+          "properties": { "task_duration_sec": false },
+          "additionalProperties": true
+        },
         "phase": { "type": "string", "minLength": 1 },
         "scenario": { "type": "string", "minLength": 1 },
         "placeholder_requirements": {
           "$ref": "#/$defs/placeholder_requirements"
         }
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "scenario": { "const": "remote_sensing_access" }
+            },
+            "required": ["scenario"]
+          },
+          "then": {
+            "required": [
+              "reference_utc",
+              "compute_horizon_sec",
+              "working_time_sec",
+              "step_sec"
+            ],
+            "properties": {
+              "compute_horizon_sec": {
+                "minimum": 200,
+                "maximum": 604800
+              },
+              "working_time_sec": { "const": 200 },
+              "step_sec": { "const": 10 }
+            },
+            "not": {
+              "anyOf": [
+                { "required": ["task"] },
+                { "required": ["constraints"] }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "scenario": { "const": "downlink_window" } },
+            "required": ["scenario"]
+          },
+          "then": {
+            "required": [
+              "reference_utc",
+              "compute_horizon_sec",
+              "working_time_sec",
+              "step_sec"
+            ],
+            "properties": {
+              "compute_horizon_sec": {
+                "minimum": 3600,
+                "maximum": 7200
+              },
+              "working_time_sec": {
+                "minimum": 3600,
+                "maximum": 7200
+              },
+              "step_sec": { "const": 5 }
+            },
+            "not": {
+              "anyOf": [
+                { "required": ["task"] },
+                { "required": ["constraints"] }
+              ]
+            }
+          }
+        }
+      ]
     },
     "candidate": {
       "type": "object",

@@ -249,6 +249,41 @@
       "notes": "TM-031: placeholder_requirements additionalProperties:false"
     },
     {
+      "id": "N-1.1-14",
+      "path": "negative/1.1/offer_missing_access_time_model.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "AC-004/TM-031: access offer requires the complete H/W/step time model"
+    },
+    {
+      "id": "N-1.1-15",
+      "path": "negative/1.1/offer_invalid_access_time_model.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "AC-004/TM-031: downlink horizon must be 3600..7200 seconds"
+    },
+    {
+      "id": "N-1.1-16",
+      "path": "negative/1.1/offer_obsolete_access_time_field.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "AC-004/TM-031: obsolete duration_sec is forbidden in offer payload"
+    },
+    {
+      "id": "N-1.1-17",
+      "path": "negative/1.1/offer_obsolete_elapsed_start_field.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "AC-004/TM-031: obsolete elapsed_start_sec is forbidden in offer payload"
+    },
+    {
+      "id": "N-1.1-18",
+      "path": "negative/1.1/offer_obsolete_constraint_duration_field.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "AC-004/TM-031: obsolete constraints.task_duration_sec is forbidden"
+    },
+    {
       "id": "P-M-1.0-01",
       "path": "archive/1.0/manifest/access_compute.json",
       "kind": "manifest",
