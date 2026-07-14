@@ -10,6 +10,9 @@ if [[ ! -f "$BUILD/meson-private/coredata.dat" ]]; then
 fi
 meson compile -C "$BUILD"
 
+echo "==> mission_params_rules SSOT generate --check"
+python3 "$ROOT/scripts/generate_mission_params_rules.py" --check
+
 python3 - "$ROOT" <<'PY'
 import json
 import pathlib

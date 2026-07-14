@@ -44,6 +44,7 @@ if install_sdk
     'src/satellite/result_envelope.hpp',
     'src/satellite/schema_validate.hpp',
     'src/satellite/cli_options.hpp',
+    'src/satellite/mission_params_rules.generated.hpp',
     subdir: 'satellite',
   )
 
@@ -72,6 +73,8 @@ if install_sdk
     'schemas/common/time_range.schema.json',
     'schemas/common/receiver.schema.json',
     'schemas/common/mission_params.schema.json',
+    'schemas/common/mission_params_rules.1.1.json',
+    'schemas/common/mission_params_by_task_type.1.1.generated.schema.json',
     'schemas/common/envelope_header.1.1.schema.json',
     install_dir: get_option('datadir') / 'satellite-plugin-sdk/schemas/common',
   )

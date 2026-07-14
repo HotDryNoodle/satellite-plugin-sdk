@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mission-planer.local/schemas/common/mission_params_by_task_type.1.1.generated.schema.json",
+  "title": "MissionParamsByTaskType11Generated",
+  "description": "GENERATED from mission_params_rules.1.1.json — do not edit by hand. Referenced by task_envelope.1.1.schema.json mission_submit allOf.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "const": "remote_detection"
+          }
+        },
+        "required": [
+          "task_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "params": {
+            "type": "object",
+            "required": [
+              "target_lla",
+              "receiver",
+              "time_range"
+            ],
+            "properties": {
+              "target_lla": {
+                "$ref": "geo_point.schema.json"
+              },
+              "receiver": {
+                "$ref": "receiver.schema.json"
+              },
+              "time_range": {
+                "$ref": "time_range.schema.json"
+              }
+            },
+            "not": {
+              "required": [
+                "execute_ip"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "const": "single_remote_detection"
+          }
+        },
+        "required": [
+          "task_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "params": {
+            "type": "object",
+            "required": [
+              "target_lla",
+              "receiver",
+              "time_range",
+              "execute_ip"
+            ],
+            "properties": {
+              "target_lla": {
+                "$ref": "geo_point.schema.json"
+              },
+              "receiver": {
+                "$ref": "receiver.schema.json"
+              },
+              "time_range": {
+                "$ref": "time_range.schema.json"
+              },
+              "execute_ip": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "task_type": {
+            "const": "historical_replay"
+          }
+        },
+        "required": [
+          "task_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "params": {
+            "type": "object",
+            "required": [
+              "receiver",
+              "time_range"
+            ],
+            "properties": {
+              "receiver": {
+                "$ref": "receiver.schema.json"
+              },
+              "time_range": {
+                "$ref": "time_range.schema.json"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_lla"
+                  ]
+                },
+                {
+                  "required": [
+                    "execute_ip"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

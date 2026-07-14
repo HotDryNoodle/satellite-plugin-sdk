@@ -28,5 +28,13 @@
     "ImageMetaSet": "canonical/image_meta_set.schema.json",
     "CostScore": "canonical/cost_score.schema.json",
     "PolicyDecision": "canonical/policy_decision.schema.json"
+  },
+  "mission_params_rules": {
+    "1.1": {
+      "ssot": "common/mission_params_rules.1.1.json",
+      "generated_schema": "common/mission_params_by_task_type.1.1.generated.schema.json",
+      "generated_header": "src/satellite/mission_params_rules.generated.hpp",
+      "generator": "scripts/generate_mission_params_rules.py"
+    }
   }
 }
