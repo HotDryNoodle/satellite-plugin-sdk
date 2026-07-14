@@ -1,20 +1,21 @@
 {
   "schema_version": "1.1",
-  "task_id": "task-bid-0001",
+  "message_type": "task.bid",
   "request_id": "req-1.1-offer",
-  "tool_name": "access.remote_sensing_access",
-  "status": "succeeded",
-  "node_id": "sat-B/intelligent",
+  "message_id": "msg-bid-bad-cap",
+  "source_node": "sat-B/intelligent",
+  "target_node": "sat-A/intelligent",
   "mission_id": "m-0001",
+  "step_id": "S1",
+  "offer_round_id": "round-m-0001-S1-1",
   "candidates": [
     {
       "window": {
         "start_utc": "2026-12-30T01:00:00Z",
-        "end_utc": "2026-12-30T01:03:20Z",
-        "t0_utc": "2026-12-30T01:01:40Z"
+        "end_utc": "2026-12-30T01:03:20Z"
       },
       "node_id": "sat-B/intelligent",
-      "cost": 3600.0,
+      "cost": 1.0,
       "capability": {
         "name": "mock.detect.acquire",
         "version": "0.1.0",
@@ -24,7 +25,8 @@
           "consumes": ["GeoPoint", "TimeWindow"],
           "produces": ["DataProduct"],
           "side_effect_class": "irreversible",
-          "idempotent": false
+          "idempotent": false,
+          "unexpected": true
         }
       }
     }

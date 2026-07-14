@@ -54,13 +54,22 @@
       "id": "P-1.1-04",
       "path": "envelope/1.1/task_offer.json",
       "kind": "envelope",
-      "expect": "pass"
+      "expect": "pass",
+      "notes": "TM-031: detect offer with payload.placeholder_requirements"
+    },
+    {
+      "id": "P-1.1-04b",
+      "path": "envelope/1.1/task_offer_downlink.json",
+      "kind": "envelope",
+      "expect": "pass",
+      "notes": "TM-031: downlink offer without placeholder_requirements"
     },
     {
       "id": "P-1.1-05",
       "path": "envelope/1.1/task_bid.json",
       "kind": "envelope",
-      "expect": "pass"
+      "expect": "pass",
+      "notes": "TM-031: candidate.capability is capability_summary"
     },
     {
       "id": "P-1.1-06",
@@ -224,6 +233,20 @@
       "kind": "envelope",
       "expect": "fail",
       "notes": "TM-030: task.bid requires offer_round_id"
+    },
+    {
+      "id": "N-1.1-12",
+      "path": "negative/1.1/bid_capability_extra_property.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "TM-031: capability_summary.capabilities additionalProperties:false"
+    },
+    {
+      "id": "N-1.1-13",
+      "path": "negative/1.1/offer_placeholder_extra_property.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "TM-031: placeholder_requirements additionalProperties:false"
     },
     {
       "id": "P-M-1.0-01",

@@ -57,7 +57,9 @@
           },
           "node_id": { "type": "string", "minLength": 1 },
           "cost": { "type": "number" },
-          "capability": { "type": "object" }
+          "capability": {
+            "$ref": "https://mission-planer.local/schemas/task_envelope.1.1.schema.json#/$defs/capability_summary"
+          }
         },
         "additionalProperties": false
       }

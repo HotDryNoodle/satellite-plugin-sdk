@@ -69,6 +69,97 @@
       "reply_to": { "type": "string", "minLength": 1 },
       "trace_id": { "type": "string", "minLength": 1 }
     },
+    "placeholder_requirements": {
+      "type": "object",
+      "required": [
+        "requires_kind",
+        "requires_hardware",
+        "consumes",
+        "produces"
+      ],
+      "properties": {
+        "requires_kind": { "type": "string", "minLength": 1 },
+        "requires_hardware": { "type": "string", "minLength": 1 },
+        "consumes": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "produces": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "capability_summary": {
+      "type": "object",
+      "required": ["name", "version", "capabilities"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "capabilities": {
+          "type": "object",
+          "required": [
+            "kind",
+            "hardware_tag",
+            "consumes",
+            "produces",
+            "side_effect_class",
+            "idempotent"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "compute",
+                "query",
+                "policy",
+                "actuate",
+                "transport",
+                "deliver"
+              ]
+            },
+            "hardware_tag": {
+              "type": ["string", "null"],
+              "minLength": 1
+            },
+            "consumes": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "produces": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "side_effect_class": {
+              "type": "string",
+              "enum": [
+                "none",
+                "read_only",
+                "reversible",
+                "irreversible",
+                "external_delivery"
+              ]
+            },
+            "idempotent": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "offer_payload": {
+      "type": "object",
+      "properties": {
+        "reference_utc": { "type": "string", "minLength": 1 },
+        "phase": { "type": "string", "minLength": 1 },
+        "scenario": { "type": "string", "minLength": 1 },
+        "placeholder_requirements": {
+          "$ref": "#/$defs/placeholder_requirements"
+        }
+      },
+      "additionalProperties": true
+    },
     "candidate": {
       "type": "object",
       "required": ["window", "node_id", "cost"],
@@ -85,7 +176,7 @@
         },
         "node_id": { "type": "string", "minLength": 1 },
         "cost": { "type": "number" },
-        "capability": { "type": "object" }
+        "capability": { "$ref": "#/$defs/capability_summary" }
       },
       "additionalProperties": false
     },
@@ -201,7 +292,7 @@
         "step_id": { "type": "string", "minLength": 1 },
         "offer_round_id": { "type": "string", "minLength": 1 },
         "idempotency_key": { "type": "string", "minLength": 1 },
-        "payload": { "type": "object" },
+        "payload": { "$ref": "#/$defs/offer_payload" },
         "trace_id": { "type": "string", "minLength": 1 }
       },
       "additionalProperties": false
@@ -235,7 +326,7 @@
           "type": "array",
           "items": { "$ref": "#/$defs/candidate" }
         },
-        "capability": { "type": "object" },
+        "capability": { "$ref": "#/$defs/capability_summary" },
         "trace_id": { "type": "string", "minLength": 1 }
       },
       "additionalProperties": false

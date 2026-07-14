@@ -16,11 +16,19 @@
         "t0_utc": "2026-12-30T01:01:40Z"
       },
       "node_id": "sat-B/intelligent",
-      "cost": 3600.0
+      "cost": 3600.0,
+      "capability": {
+        "name": "mock.detect.acquire",
+        "version": "0.1.0",
+        "capabilities": {
+          "kind": "actuate",
+          "hardware_tag": "optic.mock",
+          "consumes": ["GeoPoint", "TimeWindow"],
+          "produces": ["DataProduct"],
+          "side_effect_class": "irreversible",
+          "idempotent": false
+        }
+      }
     }
-  ],
-  "capability": {
-    "kind": "compute",
-    "name": "access.remote_sensing_access"
-  }
+  ]
 }
