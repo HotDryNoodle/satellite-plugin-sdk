@@ -212,6 +212,20 @@
       "notes": "TM-009 F13: status=no_result removed from active 1.1; use failed+failure_reason=no_result"
     },
     {
+      "id": "N-1.1-10",
+      "path": "negative/1.1/offer_missing_round_id.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "TM-030: task.offer requires offer_round_id"
+    },
+    {
+      "id": "N-1.1-11",
+      "path": "negative/1.1/bid_missing_round_id.json",
+      "kind": "envelope",
+      "expect": "fail",
+      "notes": "TM-030: task.bid requires offer_round_id"
+    },
+    {
       "id": "P-M-1.0-01",
       "path": "archive/1.0/manifest/access_compute.json",
       "kind": "manifest",

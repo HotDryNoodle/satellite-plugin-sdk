@@ -7,6 +7,7 @@
   "target_node": "sat-A/intelligent",
   "mission_id": "m-0001",
   "step_id": "S1",
+  "offer_round_id": "round-m-0001-S1-1",
   "candidates": [
     {
       "window": {

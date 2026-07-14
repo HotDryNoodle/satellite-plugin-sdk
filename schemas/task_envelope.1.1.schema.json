@@ -187,6 +187,7 @@
         "target_node",
         "mission_id",
         "step_id",
+        "offer_round_id",
         "payload"
       ],
       "properties": {
@@ -198,6 +199,7 @@
         "target_node": { "type": "string", "minLength": 1 },
         "mission_id": { "type": "string", "minLength": 1 },
         "step_id": { "type": "string", "minLength": 1 },
+        "offer_round_id": { "type": "string", "minLength": 1 },
         "idempotency_key": { "type": "string", "minLength": 1 },
         "payload": { "type": "object" },
         "trace_id": { "type": "string", "minLength": 1 }
@@ -215,6 +217,7 @@
         "target_node",
         "mission_id",
         "step_id",
+        "offer_round_id",
         "candidates"
       ],
       "properties": {
@@ -226,6 +229,7 @@
         "target_node": { "type": "string", "minLength": 1 },
         "mission_id": { "type": "string", "minLength": 1 },
         "step_id": { "type": "string", "minLength": 1 },
+        "offer_round_id": { "type": "string", "minLength": 1 },
         "idempotency_key": { "type": "string", "minLength": 1 },
         "candidates": {
           "type": "array",
